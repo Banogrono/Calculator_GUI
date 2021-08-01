@@ -176,11 +176,17 @@ public class Window extends JFrame {
                 }
         );
         buttons[8].addActionListener(e -> { // sub
-                    Counting.setBoardContent1(curretnTextFieldContent.toString());
-                    outputTextField.setText(" ");
-                    curretnTextFieldContent.delete(0,curretnTextFieldContent.length());
-                    curretnTextFieldContent.append(" ");
-                    Counting.flag = 1;
+                    var textFieldContent = curretnTextFieldContent.toString();
+                    if (textFieldContent.contains("-")) return;
+                    if (textFieldContent.trim().equals(""))
+                        curretnTextFieldContent.append("-");
+                    else {
+                        Counting.setBoardContent1(curretnTextFieldContent.toString());
+                        outputTextField.setText(" ");
+                        curretnTextFieldContent.delete(0, curretnTextFieldContent.length());
+                        curretnTextFieldContent.append(" ");
+                        Counting.flag = 1;
+                    }
                 }
         );
 
@@ -216,6 +222,11 @@ public class Window extends JFrame {
                 }
         );
         buttons[2].addActionListener(e -> {
+                    var textFieldContent = curretnTextFieldContent.toString();
+                    if (textFieldContent.contains(".")) return;
+                    if (textFieldContent.trim().equals(""))
+                        curretnTextFieldContent.append("0");
+
                     curretnTextFieldContent.append(".");
                     outputTextField.setText(curretnTextFieldContent.toString());
                 }
