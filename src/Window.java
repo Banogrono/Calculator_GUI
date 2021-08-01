@@ -10,12 +10,12 @@ public class Window extends JFrame {
 
     // ===========> Look & Feel <==================
 
-        Color bg_dark_gray = new Color(24,25,19);
-        Color bg_gray = new Color(45,45,45);
-        Color bg_highlight = new Color(60,60,60);
-        Color fg_white = new Color(237,237,237);
+    Color bg_dark_gray = new Color(24, 25, 19);
+    Color bg_gray = new Color(45, 45, 45);
+    Color bg_highlight = new Color(60, 60, 60);
+    Color fg_white = new Color(237, 237, 237);
 
-        Font font = new Font("Consolas", Font.PLAIN,48);
+    Font font = new Font("Consolas", Font.PLAIN, 48);
 
     // =============================================
 
@@ -47,8 +47,8 @@ public class Window extends JFrame {
 
         var outputPanel = new JPanel();
         outputPanel.setBackground(bg_gray);
-        outputPanel.setLayout(new GridLayout(1,1));
-        outputPanel.setSize(500,100);
+        outputPanel.setLayout(new GridLayout(1, 1));
+        outputPanel.setSize(500, 100);
         backPanel.add(outputPanel, BorderLayout.NORTH);
 
         // ====> Button panel <========================================
@@ -56,28 +56,32 @@ public class Window extends JFrame {
 
         var buttonPanel = new JPanel();
         buttonPanel.setBackground(bg_dark_gray);
-        buttonPanel.setLayout(new GridLayout(4,4,3,3));
-        backPanel.add(buttonPanel,BorderLayout.CENTER);
+        buttonPanel.setLayout(new GridLayout(4, 4, 3, 3));
+        backPanel.add(buttonPanel, BorderLayout.CENTER);
 
         // ====> Output text field <==================================
 
-        StringBuilder curretnTextFieldContent = new StringBuilder();
-        curretnTextFieldContent.append(" ");
+        StringBuilder currentTextFieldContent = new StringBuilder();
+        currentTextFieldContent.append(" ");
 
         var outputTextField = new JTextField();
-        outputTextField.setText(curretnTextFieldContent.toString());
+        outputTextField.setText(currentTextFieldContent.toString());
         outputTextField.setForeground(fg_white);
         outputTextField.setBackground(bg_gray);
         outputTextField.setFont(font);
-        outputTextField.setSize(490,50);
+        outputTextField.setSize(490, 50);
         outputTextField.setBorder(BorderFactory.createEtchedBorder(0));
         outputPanel.add(outputTextField);
 
+        // ====> Keyboard handler <===================================
+
+        KeyboardHandler keyboardHandler = new KeyboardHandler(outputTextField);
+
         // ====> Buttons <===========================================
 
-        JButton [] buttons = new JButton[16];
+        JButton[] buttons = new JButton[16];
 
-        for (int i = 15; i >= 0 ; i--) {
+        for (int i = 15; i >= 0; i--) {
             buttons[i] = new JButton();
 
             int finalI1 = i;
@@ -125,66 +129,66 @@ public class Window extends JFrame {
         // =====================
 
         buttons[15].addActionListener(e -> {
-                    curretnTextFieldContent.append(9);
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(9);
+                    outputTextField.setText(currentTextFieldContent.toString());
                 }
-                );
+        );
 
         buttons[15].addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (e.getKeyCode() == 105 || e.getKeyCode() == 57) {
-                    curretnTextFieldContent.append(9);
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(9);
+                    outputTextField.setText(currentTextFieldContent.toString());
                 }
             }
         });
 
         buttons[14].addActionListener(e -> {
-                    curretnTextFieldContent.append(8);
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(8);
+                    outputTextField.setText(currentTextFieldContent.toString());
                 }
         );
         buttons[13].addActionListener(e -> {
-                    curretnTextFieldContent.append(7);
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(7);
+                    outputTextField.setText(currentTextFieldContent.toString());
                 }
         );
         buttons[12].addActionListener(e -> { // Add
-                    Counting.setBoardContent1(curretnTextFieldContent.toString());
+                    Counting.setBoardContent1(currentTextFieldContent.toString());
                     outputTextField.setText(" ");
-                    curretnTextFieldContent.delete(0,curretnTextFieldContent.length());
-                    curretnTextFieldContent.append(" ");
+                    currentTextFieldContent.delete(0, currentTextFieldContent.length());
+                    currentTextFieldContent.append(" ");
                     Counting.flag = 0;
                 }
         );
 
         // ---------------------------------------------------------------------
         buttons[11].addActionListener(e -> {
-                    curretnTextFieldContent.append(4);
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(4);
+                    outputTextField.setText(currentTextFieldContent.toString());
                 }
         );
         buttons[10].addActionListener(e -> {
-                    curretnTextFieldContent.append(5);
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(5);
+                    outputTextField.setText(currentTextFieldContent.toString());
                 }
         );
         buttons[9].addActionListener(e -> {
-                    curretnTextFieldContent.append(6);
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(6);
+                    outputTextField.setText(currentTextFieldContent.toString());
                 }
         );
         buttons[8].addActionListener(e -> { // sub
-                    var textFieldContent = curretnTextFieldContent.toString();
+                    var textFieldContent = currentTextFieldContent.toString();
                     if (textFieldContent.contains("-")) return;
                     if (textFieldContent.trim().equals(""))
-                        curretnTextFieldContent.append("-");
+                        currentTextFieldContent.append("-");
                     else {
-                        Counting.setBoardContent1(curretnTextFieldContent.toString());
+                        Counting.setBoardContent1(currentTextFieldContent.toString());
                         outputTextField.setText(" ");
-                        curretnTextFieldContent.delete(0, curretnTextFieldContent.length());
-                        curretnTextFieldContent.append(" ");
+                        currentTextFieldContent.delete(0, currentTextFieldContent.length());
+                        currentTextFieldContent.append(" ");
                         Counting.flag = 1;
                     }
                 }
@@ -192,71 +196,77 @@ public class Window extends JFrame {
 
         // ---------------------------------------------------------------------
         buttons[7].addActionListener(e -> {
-                    curretnTextFieldContent.append(1);
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(1);
+                    outputTextField.setText(currentTextFieldContent.toString());
+
                 }
         );
         buttons[6].addActionListener(e -> {
-                    curretnTextFieldContent.append(2);
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(2);
+                    outputTextField.setText(currentTextFieldContent.toString());
                 }
         );
         buttons[5].addActionListener(e -> {
-                    curretnTextFieldContent.append(3);
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(3);
+                    outputTextField.setText(currentTextFieldContent.toString());
                 }
         );
         buttons[4].addActionListener(e -> { // mult
-                Counting.setBoardContent1(curretnTextFieldContent.toString());
-                outputTextField.setText(" ");
-                curretnTextFieldContent.delete(0,curretnTextFieldContent.length());
-                curretnTextFieldContent.append(" ");
-                Counting.flag = 2;
+                    Counting.setBoardContent1(currentTextFieldContent.toString());
+                    outputTextField.setText(" ");
+                    currentTextFieldContent.delete(0, currentTextFieldContent.length());
+                    currentTextFieldContent.append(" ");
+                    Counting.flag = 2;
                 }
         );
 
         // ---------------------------------------------------------------------
         buttons[3].addActionListener(e -> {
-                    curretnTextFieldContent.append(0);
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(0);
+                    outputTextField.setText(currentTextFieldContent.toString());
                 }
         );
         buttons[2].addActionListener(e -> {
-                    var textFieldContent = curretnTextFieldContent.toString();
+                    var textFieldContent = currentTextFieldContent.toString();
                     if (textFieldContent.contains(".")) return;
                     if (textFieldContent.trim().equals(""))
-                        curretnTextFieldContent.append("0");
+                        currentTextFieldContent.append("0");
 
-                    curretnTextFieldContent.append(".");
-                    outputTextField.setText(curretnTextFieldContent.toString());
+                    currentTextFieldContent.append(".");
+                    outputTextField.setText(currentTextFieldContent.toString());
                 }
         );
         buttons[1].addActionListener(e -> { // equals
-                if (Counting.flag != 4)
-                    Counting.setBoardContent2(curretnTextFieldContent.toString());
+                    if (Counting.flag != 4)
+                        Counting.setBoardContent2(currentTextFieldContent.toString());
 
-                Counting.doMath();
-                curretnTextFieldContent.delete(0,curretnTextFieldContent.length());
-                outputTextField.setText(Double.toString(Counting.getResult()));
-                curretnTextFieldContent.append(Counting.getResult());
-                Counting.flag = 4;
+                    Counting.doMath();
+                    currentTextFieldContent.delete(0, currentTextFieldContent.length());
+
+                    var result = Counting.getResult();
+                    if (result % 1 == 0) {
+                        outputTextField.setText(Double.toString((int) result));
+                        currentTextFieldContent.append((int) result);
+                    } else {
+                        outputTextField.setText(Double.toString(result));
+                        currentTextFieldContent.append(result);
+                    }
+                    Counting.flag = 4;
                 }
         );
         buttons[0].addActionListener(e -> { // div
-                Counting.setBoardContent1(curretnTextFieldContent.toString());
-                outputTextField.setText(" ");
-                curretnTextFieldContent.delete(0,curretnTextFieldContent.length());
-                curretnTextFieldContent.append(" ");
-                Counting.flag = 3;
+                    Counting.setBoardContent1(currentTextFieldContent.toString());
+                    outputTextField.setText(" ");
+                    currentTextFieldContent.delete(0, currentTextFieldContent.length());
+                    currentTextFieldContent.append(" ");
+                    Counting.flag = 3;
                 }
+
         );
 
-
-
-
-
+        // KeyboardListener
+        addKeyListener(keyboardHandler);
     }
-
 
 
 }

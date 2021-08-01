@@ -1,20 +1,17 @@
-
 public class Counting {
 
-    private static String boardContentP1;
-
     public static int flag = -1;
+    private static String boardContentP1;
+    private static String boardContentP2;
+    private static double result;
 
     public static void setBoardContent1(String text) {
         boardContentP1 = text;
     }
 
-    private static String boardContentP2;
     public static void setBoardContent2(String text) {
         boardContentP2 = text;
     }
-
-    private static double result;
 
     public static double getResult() {
         return result;
@@ -48,16 +45,11 @@ public class Counting {
         var a = Double.parseDouble(boardContentP1);
         var b = Double.parseDouble(boardContentP2);
         switch (flag) {
-            case 0 ->
-                    add(a, b);
-            case 1 ->
-                    subtract(a, b);
-            case 2 ->
-                    multiply(a, b);
-            case 3 ->
-                    divide(a, b);
-            default ->
-                    System.out.println("Wrong input");
+            case 0 -> add(a, b);
+            case 1 -> subtract(a, b);
+            case 2 -> multiply(a, b);
+            case 3 -> divide(a, b);
+            default -> System.out.println("Wrong input");
         }
     }
 }
